@@ -71,7 +71,7 @@ class Puppet::Provider::InfluxdbAuth::InfluxdbAuth < Puppet::ResourceApi::Simple
       if p['resource'].key?('name') && !p['resource'].key?('id')
         resname = p['resource']['name']
         restype = p['resource']['type']
-        response = influx_get("/api/v2/#{restype}", params: { 'name': resname })
+        response = influx_get("/api/v2/#{restype}?name=#{resname}")
         if response.key?(restype)
           p['resource']['id'] = response[restype][0]['id']
         else
